@@ -103,4 +103,59 @@ export class Bounds {
         this.position = position
         this.size = size
     }
+    get x2():number {
+        return this.position.x + this.size.w
+    }
+    get y2(): number {
+        return this.position.y + this.size.h
+    }
+    contains(pt: Point):boolean {
+        if(pt.x < this.position.x) return false
+        if(pt.y < this.position.y) return false
+        if(pt.x > this.position.x+this.size.w) return false
+        if(pt.y > this.position.y+this.size.h) return false
+        return true
+    }
+
+    // scale(scale: number) {
+    //     return new Rect(this.x*scale,this.y*scale,this.w*scale,this.h*scale)
+    // }
+
+    // add(r2: Rect) {
+    //     if( this.empty && !r2.empty) return r2
+    //     if(!this.empty &&  r2.empty) return this.clone()
+    //     let x1 = Math.min(this.x,  r2.x)
+    //     let x2 = Math.max(this.x2, r2.x2)
+    //     let y1 = Math.min(this.y,  r2.y)
+    //     let y2 = Math.max(this.y2, r2.y2)
+    //     return new Rect(x1, y1, x2-x1, y2-y1)
+    // }
+
+    // makeEmpty() {
+    //     let rect = new Bounds(
+    //         Number.MAX_VALUE,
+    //         Number.MAX_VALUE,
+    //         Number.MIN_VALUE,
+    //         Number.MIN_VALUE
+    //     )
+    //     rect.empty = true
+    //     return rect
+    // }
+    //
+    // translate(position: Point) {
+    //     return new Rect(this.x+position.x,this.y+position.y,this.w,this.h)
+    // }
+
+    // grow(pt:Point) {
+    //     return new Rect(
+    //         this.x - pt.x,
+    //         this.y - pt.y,
+    //         this.w + pt.x+pt.x,
+    //         this.h + pt.y+pt.y,
+    //     )
+    // }
+    //
+    center() {
+        return new Point(this.position.x+this.size.w/2, this.position.y + this.size.h/2)
+    }
 }
