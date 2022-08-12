@@ -97,6 +97,9 @@ export class Size {
     scale(scale:number):Size {
         return new Size(this.w*scale,this.h*scale)
     }
+    asPoint():Point {
+        return new Point(this.w,this.h)
+    }
 }
 
 export class Bounds {
