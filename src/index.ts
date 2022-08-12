@@ -94,6 +94,9 @@ export class Size {
         this.w = w
         this.h = h
     }
+    scale(scale:number):Size {
+        return new Size(this.w*scale,this.h*scale)
+    }
 }
 
 export class Bounds {
