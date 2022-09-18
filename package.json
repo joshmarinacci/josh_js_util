@@ -2,6 +2,8 @@
   "name": "josh_js_util",
   "version": "0.0.8",
   "description": "",
+  "type": "module",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": ["dist"],
