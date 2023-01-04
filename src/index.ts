@@ -1,3 +1,4 @@
+export * from "./jarray.js"
 
 export interface Logger {
     info(...args: any[]):void
@@ -178,4 +179,3 @@ export class Bounds {
 }
 
 
-export * from "./jarray"
