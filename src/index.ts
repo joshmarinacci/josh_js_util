@@ -122,6 +122,17 @@ export class Bounds {
         if(pt.y > this.position.y+this.size.h) return false
         return true
     }
+    intersects(b:Bounds):boolean {
+        let p1 = b.position
+        if(this.contains(p1)) return true
+        let p2 = new Point(b.position.x+b.size.w,b.position.y)
+        if(this.contains(p2)) return true
+        let p3 = new Point(b.position.x+b.size.w,b.position.y+b.size.h)
+        if(this.contains(p3)) return true
+        let p4 = new Point(b.position.x,b.position.y+b.size.h)
+        if(this.contains(p4)) return true
+        return false
+    }
 
     // scale(scale: number) {
     //     return new Rect(this.x*scale,this.y*scale,this.w*scale,this.h*scale)
