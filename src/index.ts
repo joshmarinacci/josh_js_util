@@ -165,3 +165,6 @@ export class Bounds {
         return new Point(this.position.x+this.size.w/2, this.position.y + this.size.h/2)
     }
 }
+
+
+export * from "./jarray"
