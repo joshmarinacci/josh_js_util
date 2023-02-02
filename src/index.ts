@@ -1,4 +1,5 @@
 export * from "./jarray.js"
+export * from "./arraygrid.js"
 
 export interface Logger {
     info(...args: any[]):void

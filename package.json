@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "tsc --declaration",
-    "test": "mocha"
+    "test": "tsc && node dist/index.test.js"
   },
   "directories": {
     "src": "./src",
