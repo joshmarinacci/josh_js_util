@@ -107,76 +107,112 @@ export class Insets {
 }
 
 export class Bounds {
-    readonly position: Point;
-    readonly size: Size;
-    constructor(position:Point, size:Size) {
-        this.position = position
-        this.size = size
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+
+    constructor(x: number, y:number, w:number, h:number) {
+        this.x = x
+        this.y = y
+        this.w = w
+        this.h = h
     }
     get x2():number {
-        return this.position.x + this.size.w
+        return this.x + this.w
     }
     get y2(): number {
-        return this.position.y + this.size.h
+        return this.y + this.h
     }
     contains(pt: Point):boolean {
-        if(pt.x < this.position.x) return false
-        if(pt.y < this.position.y) return false
-        if(pt.x > this.position.x+this.size.w) return false
-        if(pt.y > this.position.y+this.size.h) return false
+        if(pt.x < this.x) return false
+        if(pt.y < this.y) return false
+        if(pt.x > this.x+this.w) return false
+        if(pt.y > this.y+this.h) return false
         return true
     }
-    intersects(b:Bounds):boolean {
-        let p1 = b.position
-        if(this.contains(p1)) return true
-        let p2 = new Point(b.position.x+b.size.w,b.position.y)
-        if(this.contains(p2)) return true
-        let p3 = new Point(b.position.x+b.size.w,b.position.y+b.size.h)
-        if(this.contains(p3)) return true
-        let p4 = new Point(b.position.x,b.position.y+b.size.h)
-        if(this.contains(p4)) return true
-        return false
+    // intersects(b:Bounds):boolean {
+    //     let p1 = b.position
+    //     if(this.contains(p1)) return true
+    //     let p2 = new Point(b.position.x+b.size.w,b.position.y)
+    //     if(this.contains(p2)) return true
+    //     let p3 = new Point(b.position.x+b.size.w,b.position.y+b.size.h)
+    //     if(this.contains(p3)) return true
+    //     let p4 = new Point(b.position.x,b.position.y+b.size.h)
+    //     if(this.contains(p4)) return true
+    //     return false
+    // }
+
+    set(number: number, number2: number, number3: number, h: number) {
+        this.x = number
+        this.y = number2
+        this.w = number3
+        this.h = h
     }
 
-    // scale(scale: number) {
-    //     return new Rect(this.x*scale,this.y*scale,this.w*scale,this.h*scale)
-    // }
+    add_self(point: Point) {
+        this.x += point.x
+        this.y += point.y
+    }
 
-    // add(r2: Rect) {
-    //     if( this.empty && !r2.empty) return r2
-    //     if(!this.empty &&  r2.empty) return this.clone()
-    //     let x1 = Math.min(this.x,  r2.x)
-    //     let x2 = Math.max(this.x2, r2.x2)
-    //     let y1 = Math.min(this.y,  r2.y)
-    //     let y2 = Math.max(this.y2, r2.y2)
-    //     return new Rect(x1, y1, x2-x1, y2-y1)
-    // }
+    add(point: Point) {
+        return new Bounds(this.x+point.x,this.y+point.y,this.w,this.h)
+    }
 
-    // makeEmpty() {
-    //     let rect = new Bounds(
-    //         Number.MAX_VALUE,
-    //         Number.MAX_VALUE,
-    //         Number.MIN_VALUE,
-    //         Number.MIN_VALUE
-    //     )
-    //     rect.empty = true
-    //     return rect
-    // }
-    //
-    // translate(position: Point) {
-    //     return new Rect(this.x+position.x,this.y+position.y,this.w,this.h)
-    // }
+    bottom():number {
+        return this.y + this.h
+    }
+    left():number {
+        return this.x
+    }
+    right():number {
+        return this.x + this.w
+    }
+    top():number {
+        return this.y
+    }
 
-    // grow(pt:Point) {
-    //     return new Rect(
-    //         this.x - pt.x,
-    //         this.y - pt.y,
-    //         this.w + pt.x+pt.x,
-    //         this.h + pt.y+pt.y,
-    //     )
-    // }
-    //
-    center() {
-        return new Point(this.position.x+this.size.w/2, this.position.y + this.size.h/2)
+    center():Point {
+        return new Point(this.x+this.w/2, this.y+this.h/2)
+    }
+
+    intersects(other: Bounds):boolean {
+        if(this.left() >= other.right()) return false
+        if(this.right() <= other.left()) return false
+        if(this.top() >= other.bottom()) return false
+        if(this.bottom() <= other.top()) return false
+        return true
+    }
+    toString() {
+        return `(${this.x.toFixed(1)},${this.y.toFixed(1)})x(${this.w.toFixed(1)},${this.h.toFixed(1)})`
+    }
+
+    top_right():Point {
+        return new Point(this.x+this.w,this.y)
+    }
+
+    bottom_right():Point {
+        return new Point(this.x+this.w,this.y+this.h)
+    }
+
+    bottom_left():Point {
+        return new Point(this.x,this.y+this.h)
+    }
+
+    top_left():Point {
+        return new Point(this.x,this.y)
+    }
+
+    copy():Bounds {
+        return new Bounds(this.x,this.y,this.w,this.h)
+    }
+
+    sides():Insets {
+        return new Insets(
+            this.top(),
+            this.right(),
+            this.bottom(),
+            this.left()
+        )
     }
 }
