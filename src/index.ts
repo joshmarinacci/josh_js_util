@@ -1,5 +1,3 @@
-import {Point} from "./math.js";
-
 
 export interface Logger {
     info(...args: any[]):void
@@ -53,9 +51,6 @@ export function pick<T>(arr: T[]):T {
     let n = Math.floor(Math.random() * arr.length)
     return arr[n]
 }
-
-
-
 
 export * from "./math.js"
 export * from "./jarray.js"
