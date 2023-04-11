@@ -19,6 +19,9 @@ export class ArrayGrid<C> {
         let n = y * this.w + x
         this.data[n] = value
     }
+    set(n:Point, value:C):void {
+        this.set_at(n.x,n.y,value)
+    }
 
     get_at(x: number, y: number): C {
         if (x < 0) return undefined
@@ -27,6 +30,9 @@ export class ArrayGrid<C> {
         if (y >= this.h) return undefined
         let n = y * this.w + x
         return this.data[n]
+    }
+    get(n:Point):C {
+        return this.get_at(n.x,n.y)
     }
 
 
