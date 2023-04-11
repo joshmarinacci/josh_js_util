@@ -35,8 +35,11 @@ export class Point {
     magnitude() {
         return Math.sqrt(this.x * this.x + this.y * this.y)
     }
-    scale(scale: number) {
+    scale(scale: number):Point {
         return new Point(this.x*scale,this.y*scale)
+    }
+    distance(pt:Point):number {
+        return this.subtract(pt).magnitude()
     }
 
     toString() {
@@ -125,32 +128,49 @@ export class Bounds {
         return this.y + this.h
     }
 
-    bottom():number {
-        return this.y + this.h
-    }
-    left():number {
-        return this.x
-    }
-    right():number {
-        return this.x + this.w
-    }
     top():number {
         return this.y
     }
-    center():Point {
-        return new Point(this.x+this.w/2, this.y+this.h/2)
+    top_left():Point {
+        return new Point(this.x,this.top())
+    }
+    top_midpoint(): Point {
+        return new Point(this.x+this.w/2,this.top())
     }
     top_right():Point {
-        return new Point(this.x+this.w,this.y)
+        return new Point(this.x+this.w,this.top())
     }
-    bottom_right():Point {
-        return new Point(this.x+this.w,this.y+this.h)
+
+    left():number {
+        return this.x
+    }
+    left_midpoint(): Point {
+        return new Point(this.left(),this.y+this.h/2)
+    }
+
+    bottom():number {
+        return this.y + this.h
     }
     bottom_left():Point {
-        return new Point(this.x,this.y+this.h)
+        return new Point(this.x,this.bottom())
     }
-    top_left():Point {
-        return new Point(this.x,this.y)
+    bottom_midpoint(): Point {
+        return new Point(this.x+this.w/2,this.bottom())
+    }
+    bottom_right():Point {
+        return new Point(this.x+this.w,this.bottom())
+    }
+
+    right():number {
+        return this.x + this.w
+    }
+    right_midpoint(): Point {
+        return new Point(this.right(),this.y+this.h/2)
+    }
+
+
+    center():Point {
+        return new Point(this.x+this.w/2, this.y+this.h/2)
     }
     position():Point {
         return this.top_left()
@@ -205,6 +225,9 @@ export class Bounds {
     }
     grow(v: number) {
         return new Bounds(this.x - v, this.y - v, this.w + v * 2, this.h + v * 2);
+    }
+    scale(s:number):Bounds {
+        return new Bounds(this.x*s,this.y*s,this.w*s,this.h*s)
     }
     toString() {
         return `(${this.x.toFixed(1)},${this.y.toFixed(1)})x(${this.w.toFixed(1)},${this.h.toFixed(1)})`
