@@ -16,10 +16,7 @@ export function equals_array(a1: any[], b1: any[]):boolean {
 export function assert_eq<V>(message:string, a:V, b:V) {
     let matched = equals_any(a,b)
     if(!matched) {
-        console.error(`${message} failed`)
-        console.error(a)
-        console.error('not equal to')
-        console.error(b)
+        console.error(`${message} failed`,a,'not equal to',b)
         throw new Error(`${message}`)
     }
     console.info("PASSED:", message)
