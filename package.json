@@ -3,14 +3,11 @@
   "version": "0.1.13",
   "description": "",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "exports": {
+    "import": "./dist/index.js"
+  },
   "scripts": {
-    "build": "tsc --declaration",
+    "build": "tsc",
     "test": "tsc && node dist/index.test.js"
   },
   "directories": {
