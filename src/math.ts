@@ -41,10 +41,6 @@ export class Point {
     distance(pt:Point):number {
         return this.subtract(pt).magnitude()
     }
-
-    toString() {
-        return `Point(${this.x.toFixed(1)},${this.y.toFixed(1)})`
-    }
     floor():Point {
         return new Point(Math.floor(this.x),Math.floor(this.y))
     }
@@ -57,9 +53,15 @@ export class Point {
         if(y > max.y) y = max.y
         return new Point(x,y)
     }
+    lerp(t:number, that:Point):Point {
+        return new Point(lerp_number(t,this.x,that.x),lerp_number(t,this.y,that.y))
+    }
 
-    clone() {
+    copy() {
         return new Point(this.x,this.y)
+    }
+    toString() {
+        return `Point(${this.x.toFixed(1)},${this.y.toFixed(1)})`
     }
     toJSON() {
         return {
@@ -67,13 +69,8 @@ export class Point {
             y:this.y,
         }
     }
-
     static fromJSON(point: { x: number; y: number }) {
         return new Point(point.x,point.y)
-    }
-
-    lerp(t:number, that:Point):Point {
-        return new Point(lerp_number(t,this.x,that.x),lerp_number(t,this.y,that.y))
     }
 }
 
@@ -94,6 +91,22 @@ export class Size {
     asPoint():Point {
         return new Point(this.w,this.h)
     }
+
+    copy():Size {
+        return new Size(this.w,this.h)
+    }
+    toString() {
+        return `Size(${this.w} x ${this.h})`
+    }
+    toJSON(){
+        return {
+            w:this.w,
+            h:this.h,
+        }
+    }
+    static fromJSON(size: { w:number, h:number}) {
+        return new Size(size.w,size.h)
+    }
 }
 
 export class Insets {
@@ -101,11 +114,28 @@ export class Insets {
     right:number
     bottom:number
     left:number
-    constructor(top,right,bottom,left) {
+    constructor(top:number,right:number,bottom:number,left:number) {
         this.top = top
         this.right = right
         this.bottom = bottom
         this.left = left
+    }
+    copy():Insets {
+        return new Insets(this.top,this.right,this.bottom,this.left)
+    }
+    toString() {
+        return `Insets(${this.top.toFixed(1)}, ${this.right.toFixed(1)}, ${this.bottom.toFixed(1)}, ${this.left.toFixed(1)})`
+    }
+    toJSON(){
+        return {
+            top:this.top,
+            right:this.right,
+            bottom:this.bottom,
+            left:this.left,
+        }
+    }
+    static fromJSON(insets: { top:number, right:number, bottom:number, left:number}) {
+        return new Insets(insets.top,insets.right,insets.bottom,insets.left)
     }
 }
 
@@ -140,14 +170,12 @@ export class Bounds {
     top_right():Point {
         return new Point(this.x+this.w,this.top())
     }
-
     left():number {
         return this.x
     }
     left_midpoint(): Point {
         return new Point(this.left(),this.y+this.h/2)
     }
-
     bottom():number {
         return this.y + this.h
     }
@@ -160,15 +188,12 @@ export class Bounds {
     bottom_right():Point {
         return new Point(this.x+this.w,this.bottom())
     }
-
     right():number {
         return this.x + this.w
     }
     right_midpoint(): Point {
         return new Point(this.right(),this.y+this.h/2)
     }
-
-
     center():Point {
         return new Point(this.x+this.w/2, this.y+this.h/2)
     }
@@ -178,24 +203,19 @@ export class Bounds {
     size():Size {
         return new Size(this.w,this.h)
     }
-
     set(x: number, y: number, w: number, h: number) {
         this.x = x
         this.y = y
         this.w = w
         this.h = h
     }
-
     add_self(point: Point) {
         this.x += point.x
         this.y += point.y
     }
-
     add(point: Point) {
         return new Bounds(this.x+point.x,this.y+point.y,this.w,this.h)
     }
-
-
     contains(pt: Point):boolean {
         if(pt.x < this.x) return false
         if(pt.y < this.y) return false
@@ -210,11 +230,6 @@ export class Bounds {
         if(this.bottom() <= other.top()) return false
         return true
     }
-
-    copy():Bounds {
-        return new Bounds(this.x,this.y,this.w,this.h)
-    }
-
     asInsets():Insets {
         return new Insets(
             this.top(),
@@ -229,10 +244,13 @@ export class Bounds {
     scale(s:number):Bounds {
         return new Bounds(this.x*s,this.y*s,this.w*s,this.h*s)
     }
-    toString() {
-        return `(${this.x.toFixed(1)},${this.y.toFixed(1)})x(${this.w.toFixed(1)},${this.h.toFixed(1)})`
-    }
 
+    copy():Bounds {
+        return new Bounds(this.x,this.y,this.w,this.h)
+    }
+    toString() {
+        return `Bounds(${this.x.toFixed(1)}, ${this.y.toFixed(1)}) x (${this.w.toFixed(1)},${this.h.toFixed(1)})`
+    }
     toJSON() {
         return {
             x:this.x,
@@ -241,7 +259,6 @@ export class Bounds {
             h:this.h
         }
     }
-
     static fromJSON(bounds: { x: number; y: number, w:number, h:number }) {
         return new Bounds(bounds.x,bounds.y, bounds.w, bounds.h)
     }
