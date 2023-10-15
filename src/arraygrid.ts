@@ -1,4 +1,4 @@
-import {Point} from "./index.js";
+import {Point, Size} from "./math";
 
 export class ArrayGrid<C> {
     w: number;
@@ -83,5 +83,17 @@ export class ArrayGrid<C> {
             y++
         }
         return grid
+    }
+
+    static fromSize<C>(size:Size) {
+        return new ArrayGrid<C>(size.w,size.h)
+    }
+
+    static fromArray<C>(size: Size, array:C[]) {
+        let grid = ArrayGrid.fromSize(size)
+        grid.fill((pt)=>{
+            let n = pt.x + pt.y*size.w
+            return array[n]
+        })
     }
 }

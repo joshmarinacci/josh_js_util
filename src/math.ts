@@ -35,6 +35,9 @@ export class Point {
     magnitude() {
         return Math.sqrt(this.x * this.x + this.y * this.y)
     }
+    unit() {
+        return this.scale(1/this.magnitude())
+    }
     scale(scale: number):Point {
         return new Point(this.x*scale,this.y*scale)
     }
@@ -258,6 +261,15 @@ export class Bounds {
             w:this.w,
             h:this.h
         }
+    }
+    withPosition(point:Point) {
+        return new Bounds(point.x,point.y,this.w,this.h)
+    }
+    withSize(size:Size) {
+        return new Bounds(this.x,this.y,size.w,size.h)
+    }
+    static fromPointSize( point:Point, size:Size) {
+        return new Bounds(point.x,point.y,size.w,size.h)
     }
     static fromJSON(bounds: { x: number; y: number, w:number, h:number }) {
         return new Bounds(bounds.x,bounds.y, bounds.w, bounds.h)
