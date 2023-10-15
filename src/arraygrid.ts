@@ -95,5 +95,6 @@ export class ArrayGrid<C> {
             let n = pt.x + pt.y*size.w
             return array[n]
         })
+        return grid
     }
 }
