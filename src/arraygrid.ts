@@ -85,12 +85,12 @@ export class ArrayGrid<C> {
         return grid
     }
 
-    static fromSize<C>(size:Size) {
+    static fromSize<C>(size:Size):ArrayGrid<C> {
         return new ArrayGrid<C>(size.w,size.h)
     }
 
-    static fromArray<C>(size: Size, array:C[]) {
-        let grid = ArrayGrid.fromSize(size)
+    static fromArray<C>(size: Size, array:C[]):ArrayGrid<C> {
+        let grid = ArrayGrid.fromSize<C>(size)
         grid.fill((pt)=>{
             let n = pt.x + pt.y*size.w
             return array[n]
