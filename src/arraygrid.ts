@@ -36,6 +36,15 @@ export class ArrayGrid<C> {
     }
 
 
+    isValidIndex(pt: Point) {
+        if (pt.x < 0) return false
+        if (pt.y < 0) return false
+        if (pt.x >= this.w) return false
+        if (pt.y >= this.h) return false
+        return true
+    }
+
+
     forEach(cb: (value:C, index:Point)=>void) {
         for (let j = 0; j < this.h; j++) {
             for (let i = 0; i < this.w; i++) {
