@@ -12,7 +12,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "tsc && node dist/index.test.js"
+    "test": "tsc && node dist/index.test.js",
+    "release": "npm run build && npm run test && npm version patch && npm publish"
   },
   "directories": {
     "src": "./src",
