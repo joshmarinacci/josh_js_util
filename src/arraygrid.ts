@@ -1,4 +1,4 @@
-import {Point, Size} from "./math";
+import {Point, Size} from "./math.js";
 
 export class ArrayGrid<C> {
     w: number;
