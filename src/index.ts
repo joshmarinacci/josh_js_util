@@ -6,28 +6,36 @@ export interface Logger {
   warn(...args: any[]): void;
 
   assert(cond: boolean, msg: string): void;
+
+  setEnabled(enabled: boolean): void;
 }
 
 class ConsoleLogger implements Logger {
   prefix: string;
+  private enabled: boolean;
   constructor(prefix: string) {
     this.prefix = prefix;
+    this.enabled = true;
+  }
+
+  setEnabled(enabled: boolean): void {
+    this.enabled = enabled;
   }
   error(...args: any[]) {
-    console.error(`${this.prefix}:ERROR`, ...args);
+    if (this.enabled) console.error(`${this.prefix}:ERROR`, ...args);
   }
 
   info(...args: any[]) {
-    console.info(`${this.prefix}:INFO`, ...args);
+    if (this.enabled) console.info(`${this.prefix}:INFO`, ...args);
   }
 
   warn(...args: any[]) {
-    console.warn(`${this.prefix}:WARN`, ...args);
+    if (this.enabled) console.warn(`${this.prefix}:WARN`, ...args);
   }
 
   assert(cond: boolean, msg: string): void {
     if (!cond) throw new Error(`${this.prefix}:ASSERT FAILED ${msg}`);
-    console.log(`${this.prefix}:ASSERT`, msg);
+    if (this.enabled) console.log(`${this.prefix}:ASSERT`, msg);
   }
 }
 
