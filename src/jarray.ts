@@ -7,17 +7,17 @@ export class JArray<D> extends Array<D> {
     for (let i = 0; i < first; i++) arr.push(i);
     return arr;
   }
-  constructor(...args) {
+  constructor(...args: D[]) {
     super(...args);
   }
-  map<Z>(fn: (val, index, arr) => Z): JArray<Z> {
+  map<Z>(fn: (val: D, idnex: number, arr: D[]) => Z): JArray<Z> {
     return super.map(fn) as JArray<Z>;
   }
-  tap(fn: (val, idnex, arr) => void): JArray<D> {
+  tap(fn: (val: D, idnex: number, arr: D[]) => void): JArray<D> {
     this.forEach(fn);
     return this;
   }
-  filter(fn: (val, index, arr) => boolean): JArray<D> {
+  filter(fn: (val: D, index: number, arr: D[]) => boolean): JArray<D> {
     return super.filter(fn) as JArray<D>;
   }
   pluck(name: keyof D): JArray<any> {

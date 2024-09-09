@@ -44,7 +44,7 @@ export function make_logger(prefix?: string): Logger {
 }
 
 export function sleep(sec: number): Promise<void> {
-  return new Promise((res, rej) => {
+  return new Promise((res, _rej) => {
     setTimeout(() => res(), Math.floor(sec * 1000));
   });
 }

@@ -24,10 +24,22 @@ export class ArrayGrid<C> {
   }
 
   get_at(x: number, y: number): C {
-    if (x < 0) return undefined;
-    if (y < 0) return undefined;
-    if (x >= this.w) return undefined;
-    if (y >= this.h) return undefined;
+    if (x < 0) {
+      // @ts-ignore
+      return undefined;
+    }
+    if (y < 0) {
+      // @ts-ignore
+      return undefined;
+    }
+    if (x >= this.w) {
+      // @ts-ignore
+      return undefined;
+    }
+    if (y >= this.h) {
+      // @ts-ignore
+      return undefined;
+    }
     let n = y * this.w + x;
     return this.data[n];
   }

@@ -11,8 +11,10 @@
     "import": "./dist/index.js"
   },
   "scripts": {
-    "build": "tsc",
-    "test": "vitest src",
+    "clean": "rm -rf dist",
+    "build": "esbuild src/index.ts --bundle --outdir=dist",
+    "tsc": "tsc",
+    "test": "vitest run --dir src",
     "release": "npm run build && npm run test && npm version patch && npm publish"
   },
   "directories": {
@@ -23,13 +25,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^4.7.4",
-    "@types/chai": "^4.3.4",
-    "@types/mocha": "^10.0.1",
-    "chai": "^4.3.7",
-    "mocha": "^10.2.0",
-    "ts-mocha": "^10.0.0",
-    "ts-node": "^9.1.1",
-    "vitest": "^2.0.5"
+    "typescript": "^5.6.2",
+    "vitest": "^2.0.5",
+    "esbuild": "^0.23.1"
   }
 }

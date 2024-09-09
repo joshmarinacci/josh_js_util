@@ -288,7 +288,7 @@ export class Bounds {
       this.h + insets.top + insets.bottom,
     );
   }
-  shrinkInsets(insets): Bounds {
+  shrinkInsets(insets: Insets): Bounds {
     return new Bounds(
       this.x + insets.left,
       this.y + insets.top,

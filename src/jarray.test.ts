@@ -1,4 +1,4 @@
-import { describe, expect, it, assert } from "vitest";
+import { describe, it, assert } from "vitest";
 import { JArray } from "./jarray";
 import { Point } from "./index";
 

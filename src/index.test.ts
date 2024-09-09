@@ -10,7 +10,7 @@ CellGrid is a grid with specific cells.
 
 */
 
-import { describe, expect, it, assert } from "vitest";
+import { describe, it } from "vitest";
 import { Point } from "./index.js";
 import { assert_eq } from "./assert.js";
 import { ArrayGrid } from "./arraygrid.js";
@@ -33,7 +33,7 @@ describe("test array grid", () => {
     assert_eq("filled", ag3.get_at(1, 1), "d");
 
     let pattern = "_XXX_";
-    let ag4 = ArrayGrid.fromPattern(pattern, (ch, index) =>
+    let ag4 = ArrayGrid.fromPattern(pattern, (ch, _index) =>
       ch === "X" ? 1 : 0,
     );
     assert_eq("size", ag4.size(), 5);
@@ -53,7 +53,7 @@ describe("test array grid", () => {
       G_R
       RGB
     `;
-    let parts = ArrayGrid.fromPattern(pat2, (ch, index) => {
+    let parts = ArrayGrid.fromPattern(pat2, (ch, _index) => {
       let part: Particle = {
         color: "red",
         visible: true,
