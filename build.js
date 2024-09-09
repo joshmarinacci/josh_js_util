@@ -10,17 +10,17 @@ async function go() {
     minify: false,
   };
 
-  await new Generator({
-    entry: "src/index.ts",
-    output: `${outdir}/index.d.ts`,
-  }).generate();
+  // await new Generator({
+  //   entry: "src/index.ts",
+  //   output: `dist/index.d.ts`,
+  // }).generate();
 
-  // await build({
-  //   ...sharedConfig,
-  //   platform: "node",
-  //   outfile: `${outdir}/index.cjs`,
-  //   external: ["rtds-core", "react", "react-dom"],
-  // });
+  await build({
+    ...sharedConfig,
+    platform: "node",
+    outfile: `dist/index.cjs`,
+    external: [""],
+  });
 
   await build({
     ...sharedConfig,
