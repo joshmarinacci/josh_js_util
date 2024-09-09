@@ -8,19 +8,12 @@
   "files": [
     "dist/*"
   ],
-  "exports": {
-    "import": "./dist/index.js"
-  },
   "scripts": {
     "clean": "rm -rf dist",
     "build": "esbuild src/index.ts --bundle --outdir=dist",
     "tsc": "tsc",
     "test": "vitest run --dir src",
     "release": "npm run build && npm run test && npm version patch && npm publish"
-  },
-  "directories": {
-    "src": "./src",
-    "test": "./src"
   },
   "dependencies": {},
   "author": "josh@josh.earth",
