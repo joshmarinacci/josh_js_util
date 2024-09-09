@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "tsc && node dist/index.test.js",
+    "test": "vitest src",
     "release": "npm run build && npm run test && npm version patch && npm publish"
   },
   "directories": {
@@ -29,6 +29,7 @@
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
     "ts-mocha": "^10.0.0",
-    "ts-node": "^9.1.1"
+    "ts-node": "^9.1.1",
+    "vitest": "^2.0.5"
   }
 }

@@ -91,11 +91,20 @@ export class Size {
     this.w = w;
     this.h = h;
   }
+  addPoint(pt: Point): Size {
+    return new Size(this.w + pt.x, this.h + pt.y);
+  }
   scale(scale: number): Size {
     return new Size(this.w * scale, this.h * scale);
   }
   asPoint(): Point {
     return new Point(this.w, this.h);
+  }
+  growInsets(insets: Insets): Size {
+    return new Size(
+      this.w + insets.left + insets.right,
+      this.h + insets.top + insets.bottom,
+    );
   }
 
   copy(): Size {
@@ -129,6 +138,25 @@ export class Insets {
   copy(): Insets {
     return new Insets(this.top, this.right, this.bottom, this.left);
   }
+  add(insets: Insets): Insets {
+    return new Insets(
+      this.top + insets.top,
+      this.right + insets.right,
+      this.bottom + insets.bottom,
+      this.left + insets.left,
+    );
+  }
+  width(): number {
+    return this.left + this.right;
+  }
+  height(): number {
+    return this.top + this.bottom;
+  }
+  isEmpty() {
+    return (
+      this.left <= 0 && this.right <= 0 && this.top <= 0 && this.bottom <= 0
+    );
+  }
   toString() {
     return `Insets(${this.top.toFixed(1)}, ${this.right.toFixed(
       1,
@@ -141,6 +169,9 @@ export class Insets {
       bottom: this.bottom,
       left: this.left,
     };
+  }
+  static from(value: number) {
+    return new Insets(value, value, value, value);
   }
   static fromJSON(insets: {
     top: number;
@@ -248,6 +279,22 @@ export class Bounds {
   }
   grow(v: number) {
     return new Bounds(this.x - v, this.y - v, this.w + v * 2, this.h + v * 2);
+  }
+  growInsets(insets: Insets): Bounds {
+    return new Bounds(
+      this.x - insets.left,
+      this.y - insets.top,
+      this.w + insets.left + insets.right,
+      this.h + insets.top + insets.bottom,
+    );
+  }
+  shrinkInsets(insets): Bounds {
+    return new Bounds(
+      this.x + insets.left,
+      this.y + insets.top,
+      this.w - insets.left - insets.right,
+      this.h - insets.top - insets.bottom,
+    );
   }
   scale(s: number): Bounds {
     return new Bounds(this.x * s, this.y * s, this.w * s, this.h * s);
