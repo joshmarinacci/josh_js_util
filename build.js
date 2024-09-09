@@ -10,10 +10,10 @@ async function go() {
     minify: false,
   };
 
-  // await new Generator({
-  //   entry: "src/index.ts",
-  //   output: `${outdir}/index.d.ts`,
-  // }).generate();
+  await new Generator({
+    entry: "src/index.ts",
+    output: `${outdir}/index.d.ts`,
+  }).generate();
 
   // await build({
   //   ...sharedConfig,
