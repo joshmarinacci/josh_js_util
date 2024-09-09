@@ -1,6 +1,6 @@
 {
   "name": "josh_js_util",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "description": "josh personal utils",
   "type": "module",
   "types": "./dist/index.d.ts",
