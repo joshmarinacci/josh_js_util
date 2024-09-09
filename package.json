@@ -3,7 +3,8 @@
   "version": "0.1.30",
   "description": "",
   "type": "module",
-  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
   "files": [
     "dist/*"
   ],
@@ -22,7 +23,7 @@
     "test": "./src"
   },
   "dependencies": {},
-  "author": "",
+  "author": "josh@josh.earth",
   "license": "ISC",
   "devDependencies": {
     "typescript": "^5.6.2",
