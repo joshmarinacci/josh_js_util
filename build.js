@@ -7,27 +7,27 @@ async function go() {
   const sharedConfig = {
     entryPoints: ["src/index.ts"],
     bundle: true,
-    minify: true,
+    minify: false,
   };
 
-  await new Generator({
-    entry: "src/index.ts",
-    output: `${outdir}/index.d.ts`,
-  }).generate();
+  // await new Generator({
+  //   entry: "src/index.ts",
+  //   output: `${outdir}/index.d.ts`,
+  // }).generate();
 
-  await build({
-    ...sharedConfig,
-    platform: "node",
-    outfile: `${outdir}/index.cjs`,
-    external: ["rtds-core", "react", "react-dom"],
-  });
+  // await build({
+  //   ...sharedConfig,
+  //   platform: "node",
+  //   outfile: `${outdir}/index.cjs`,
+  //   external: ["rtds-core", "react", "react-dom"],
+  // });
 
   await build({
     ...sharedConfig,
     platform: "neutral",
     format: "esm",
     outfile: `${outdir}/index.esm.js`,
-    external: ["rtds-core", "react", "react-dom"],
+    external: [""],
   });
 }
 

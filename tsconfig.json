@@ -17,7 +17,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "dist",
-    "resolveJsonModule": true,
+    "resolveJsonModule": false,
     //    "jsx": "react-jsx",
 
     /* Linting */
