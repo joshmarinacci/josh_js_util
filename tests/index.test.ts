@@ -11,9 +11,9 @@ CellGrid is a grid with specific cells.
 */
 
 import { describe, it } from "vitest";
-import { Point } from "./index.js";
-import { assert_eq } from "./assert.js";
-import { ArrayGrid } from "./arraygrid.js";
+import { Point } from "../src";
+import { assert_eq } from "../src/assert";
+import { ArrayGrid } from "../src/arraygrid";
 
 describe("test array grid", () => {
   it("can create an array grid", () => {

@@ -1,6 +1,6 @@
 import { describe, it, assert } from "vitest";
-import { JArray } from "./jarray";
-import { Point } from "./index";
+import { JArray } from "../src/jarray";
+import { Point } from "../src";
 
 describe("JArray", () => {
   it("is an instance of Array", () => {

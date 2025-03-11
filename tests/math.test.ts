@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Insets } from "./math";
+import { Insets } from "../src/math";
 
 describe("inset tests", () => {
   it("can add insets to eachother", () => {
