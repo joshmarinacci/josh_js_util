@@ -10,10 +10,10 @@ export class JArray<D> extends Array<D> {
   constructor(...args: D[]) {
     super(...args);
   }
-  map<Z>(fn: (val: D, idnex: number, arr: D[]) => Z): JArray<Z> {
+  map<Z>(fn: (val: D, index: number, arr: D[]) => Z): JArray<Z> {
     return super.map(fn) as JArray<Z>;
   }
-  tap(fn: (val: D, idnex: number, arr: D[]) => void): JArray<D> {
+  tap(fn: (val: D, index: number, arr: D[]) => void): JArray<D> {
     this.forEach(fn);
     return this;
   }

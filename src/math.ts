@@ -100,6 +100,9 @@ export class Size {
   asPoint(): Point {
     return new Point(this.w, this.h);
   }
+  floor():Size {
+    return new Size(Math.floor(this.w), Math.floor(this.h));
+  }
   growInsets(insets: Insets): Size {
     return new Size(
       this.w + insets.left + insets.right,

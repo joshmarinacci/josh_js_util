@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Insets } from "../src/math";
+import {Bounds, Insets, Point, Size} from "../src/math";
 
 describe("inset tests", () => {
   it("can add insets to eachother", () => {
@@ -9,4 +9,14 @@ describe("inset tests", () => {
     const insb = ins.add(insa);
     expect(insb).toEqual(new Insets(6, 8, 10, 12));
   });
+  it('can create a bounds from a point and a size', () => {
+    const bds = Bounds.fromPointSize(new Point(1,2), new Size(3,4))
+    expect(bds).toStrictEqual(new Bounds(1,2,3,4))
+  })
 });
+describe("Size", () => {
+  it("can do Size.floor()", () => {
+    const size = new Size(22.5,33.8)
+    expect(size.floor()).toEqual(new Size(22,33))
+  })
+})
